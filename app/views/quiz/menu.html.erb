@@ -1,0 +1,17 @@
+<div style="text-align: center;">
+          <%
+          if @attempt.phase == "begin"
+          %>
+          <br/><br/>
+          <b>Are you a trivia expert?</b><br/>
+          <a href="/quiz/index">Test your knowledge on this quiz.</a>
+          <%
+          else
+          %>
+          <br/><br/>
+          Thanks for playing!
+          <%
+          end
+          %>
+        <br/><br/><br/>
+</div>

@@ -1,0 +1,9 @@
+ports:
+  - port: 3000
+    onOpen: open-preview
+tasks:
+  - init: >
+      bundle install &&
+      bundle exec rake db:migrate RAILS_ENV=development
+    command: >
+      rails server

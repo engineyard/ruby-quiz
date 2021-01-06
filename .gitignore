@@ -1,0 +1,11 @@
+# Log files
+*.log
+
+# Package Files
+*.zip
+*.tar.gz
+*.rar
+
+db/development.sqlite3
+tmp/cache/
+
