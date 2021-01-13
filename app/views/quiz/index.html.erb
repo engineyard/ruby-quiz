@@ -1,0 +1,93 @@
+<table width="923px">
+ <tbody width="100%">
+  <tr>
+   <td width="20%">&nbsp;</td>
+   <td width="60%" style="text-align: center;">
+<%
+  puts "------ Index JSP ------------"
+
+  if not @message.nil?
+%>
+    <span style="color: #2874a6"><%= @message %></span><br/><br/>
+<%
+  end
+  puts "The phase is #{@attempt.phase}"
+  if @attempt.phase == "begin"
+    @attempt.current_question_number == 9
+%>
+     <br/><br/>
+     Please enter your first name to start the quiz.<br/><br/>
+     <%= form_for @attempt, url: '/quiz/start' do |f| %>
+       <%= f.text_field :taker %>
+       <%= f.hidden_field :quiz_id %>
+       <%= f.hidden_field :number_correct %>
+       <%= f.hidden_field :current_question_number %>
+       <%= f.hidden_field :phase %>
+       <%= f.submit "Start the Quiz" %>
+     <% end %>
+    </td>
+<%
+  else
+    puts "The current question is #{@attempt.current_question_number}"
+    current_question = @questions[@attempt.current_question_number - 1]
+
+    # Determine if that was the last question
+    if @attempt.current_question_number > @questions.size
+        puts "No more questions! We are done."
+        @attempt.phase = "quiz"
+%>
+        <b>You have completed the quiz!</b><br/><br/>
+        You got <%= @attempt.number_correct %> question(s) correct out of <%= @questions.size %>. <br/><br/>
+
+            <%= form_for @attempt, url: '/quiz/menu' do |f| %>
+            <%= f.hidden_field :quiz_id %>
+            <%= f.hidden_field :number_correct %>
+            <%= f.hidden_field :taker %>
+            <%= f.hidden_field :current_question_number %>
+            <%= f.hidden_field :phase %>
+            <%= f.submit "Go back to the main menu" %>
+            <% end %>
+<%  else  %>
+        <b>Quiz:</b> <%= @quiz.name %>&nbsp;&nbsp;&nbsp;
+        <b>Question</b> #<%= @attempt.current_question_number %> of <%= @questions.size %>&nbsp;&nbsp;&nbsp;
+        <b>Name:</b> <%= @attempt.taker %><br/><br/>
+        <b><%= current_question.question %></b><br/>
+        <table>
+          <tr><td>A.</td><td style="text-align: left;">&nbsp;&nbsp;<%= current_question.option_a %></td></tr>
+          <tr><td>B.</td><td style="text-align: left;">&nbsp;&nbsp;<%= current_question.option_b %></td></tr>
+          <tr><td>C.</td><td style="text-align: left;">&nbsp;&nbsp;<%= current_question.option_c %></td></tr>
+          <tr><td>D.</td><td style="text-align: left;">&nbsp;&nbsp;<%= current_question.option_d %></td></tr>
+        </table>
+       </td>
+     </tr>
+     <tr>
+       <td colspan="3" style="text-align: center;">
+        <br/>
+        <%= image_tag("Question#{@attempt.current_question_number}.png")%>
+       </td>
+     </tr>
+     <tr>
+       <td width="20%">&nbsp;</td>
+       <td width="60%" style="text-align: center;">
+        <br/>
+        <%= form_for @attempt, url: '/quiz/answer' do |f| %>
+          <%= f.select :answer, [["A", "A"], ["B", "B"], ["C", "C"], ["D", "D"]],
+                                   { include_blank: false } %>
+          <%= f.hidden_field :quiz_id %>
+          <%= f.hidden_field :number_correct %>
+          <%= f.hidden_field :taker %>
+          <%= f.hidden_field :current_question_number %>
+          <%= f.hidden_field :phase %>
+          <%= f.submit "Submit your Answer" %>
+        <% end %>
+
+<%  end
+  end
+%>
+   </td>
+   <td width="20%">&nbsp;</td>
+  </tr>
+ </tbody>
+</table>
+<br/><br/>
+<% puts "End of quiz JSP" %>
