@@ -10,13 +10,8 @@ default: &default
   timeout: 5000
 
 development:
-  adapter: mysql2
-  encoding: utf8
-  pool: 5
-  username: <%= Rails.application.credentials.db_yml_username %>
-  password: <%= Rails.application.credentials.db_yml_password %>
-  host: <%= Rails.application.credentials.db_yml_host %>
-  database: quizdatabase
+  <<: *default
+  database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
