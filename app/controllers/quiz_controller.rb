@@ -111,12 +111,13 @@ class QuizController < ApplicationController
   end
 
   def summary
-      response = {}
       sum_of_correct_answers = 0
       high_score = 0
       attempts = Attempt.all
       attempts.each do |attempt|
+        # Maintain the sum so we can calculate the average later
         sum_of_correct_answers = sum_of_correct_answers + attempt.number_correct
+        # Check if this is the new high score
         if attempt.number_correct > high_score
               high_score = attempt.number_correct 
           end 
@@ -124,6 +125,7 @@ class QuizController < ApplicationController
 
       average_score = (sum_of_correct_answers.to_f / attempts.size.to_f).round(2)
 
+      response = {}
       response["number_of_participants"] = attempts.size
       response["average_score"] = average_score
       response["high_score"] = high_score
@@ -131,12 +133,12 @@ class QuizController < ApplicationController
   end 
 
   def participants 
-    response = {}
     participants = [] 
     Attempt.all.each do |attempt|
         participants << attempt.taker
     end 
 
+    response = {}
     response["participants"] = participants
     render :json => JSON[response]
   end

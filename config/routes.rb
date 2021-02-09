@@ -10,9 +10,6 @@ Rails.application.routes.draw do
   get 'quiz/menu'
   post 'quiz/menu'
   patch 'quiz/answer'
-
-  get 'quiz/summary'
-  get 'quiz/participants'
   
   resources :attempts
 end
