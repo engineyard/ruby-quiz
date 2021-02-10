@@ -123,23 +123,16 @@ class QuizController < ApplicationController
           end 
       end 
 
-      average_score = (sum_of_correct_answers.to_f / attempts.size.to_f).round(2)
-
       response = {}
       response["number_of_participants"] = attempts.size
-      response["average_score"] = average_score
+      response["average_score"] = (sum_of_correct_answers.to_f / attempts.size.to_f).round(2)
       response["high_score"] = high_score
       render :json => JSON[response]
   end 
 
   def participants 
-    participants = [] 
-    Attempt.all.each do |attempt|
-        participants << attempt.taker
-    end 
-
     response = {}
-    response["participants"] = participants
+    response["participants"] = Attempt.all.map { |attempt| attempt.taker }
     render :json => JSON[response]
   end
 end
