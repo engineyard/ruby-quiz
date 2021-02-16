@@ -67,7 +67,7 @@ Rails.application.configure do
   config.rails_semantic_logger.add_file_appender = false
   config.semantic_logger.add_appender(io: STDOUT, level: config.log_level, formatter: config.rails_semantic_logger.format)
   #config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
-  #config.log_tags = [:request_id]
+  config.log_tags = [:request_id]
 
   config.web_console.whitelisted_ips = '10.101.63.36'
 end
