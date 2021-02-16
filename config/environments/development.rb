@@ -63,4 +63,6 @@ Rails.application.configure do
 
   config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
   config.log_tags = [:request_id]
+
+  config.web_console.permissions = '10.101.0.0/32'
 end
