@@ -42,7 +42,7 @@ class QuizController < ApplicationController
     @attempt.number_correct = 0
     @attempt.number_incorrect = 0
     @attempt.current_question_number = 1
-    puts "The quiz taker is #{@attempt.taker}"
+    logger.info "The quiz taker is #{@attempt.taker}"
     if @attempt.taker.nil?
         @message = "You must provide a name."
         @attempt.phase = "begin"
@@ -52,7 +52,7 @@ class QuizController < ApplicationController
     else
         @attempt.phase = "name"
     end
-    puts "Saving the attempt in the database..."
+    logger.info "Saving the attempt in the database..."
     @attempt.save
     render :template => "quiz/index"
   end
@@ -62,13 +62,13 @@ class QuizController < ApplicationController
   end
 
   def restart
-    puts "In controller restart"
+    logger.info "In controller restart"
     load_data
     render :template => "quiz/menu"
   end
 
   def answer
-    puts "In controller answer"
+    logger.info "In controller answer"
     load_data
 
     current_question = @questions[@attempt.current_question_number.to_i - 1]
@@ -99,12 +99,11 @@ class QuizController < ApplicationController
         end
         @message = "Sorry, the correct answer was #{current_question.correct_answer}: #{correct_answer_text}"
     end
-    puts "Total questions: #{@questions.size}. We are on question #{@attempt.current_question_number.to_i}"
-    puts "The correct answer was #{current_question.correct_answer}. User chose #{@attempt.answer}."
-    puts "Current number correct: #{@attempt.number_correct}"
+    logger.info "Total questions: #{@questions.size}. We are on question #{@attempt.current_question_number.to_i}"
+    logger.info "The correct answer was #{current_question.correct_answer}. User chose #{@attempt.answer}."
+    logger.info "Current number correct: #{@attempt.number_correct}"
 
     @attempt.current_question_number = @attempt.current_question_number.to_i + 1
-    #@attempt.update(number_correct: @attempt.number_correct, number_incorrect: @attempt.number_incorrect)
     @attempt.save
     render :template => "quiz/index"
   end
