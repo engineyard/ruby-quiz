@@ -126,9 +126,9 @@ class QuizController < ApplicationController
       end 
 
       prime_count = 0
-      Prime.each(1000) do |prime|
+      Prime.each(5000) do |prime|
           prime_count = prime_count + 1
-          if prime_count % 10 == 0
+          if prime_count % 20 == 0
               logger.info "Found a prime number: #{prime}"
           end 
       end
