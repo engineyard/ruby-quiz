@@ -60,4 +60,6 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.require_master_key = true
+
+  config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
 end
