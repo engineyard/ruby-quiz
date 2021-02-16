@@ -1,5 +1,6 @@
 require_relative '../helpers/application_helper'
 require 'set'
+require 'prime'
 
 class QuizController < ApplicationController
 
@@ -111,6 +112,7 @@ class QuizController < ApplicationController
   end
 
   def summary
+      logger.info "In summary service"
       sum_of_correct_answers = 0
       high_score = 0
       attempts = Attempt.all
@@ -122,6 +124,14 @@ class QuizController < ApplicationController
               high_score = attempt.number_correct 
           end 
       end 
+
+      prime_count = 0
+      Prime.each(1000) do |prime|
+          prime_count = prime_count + 1
+          if prime_count % 10 == 0
+              logger.info "Found a prime number: #{prime}"
+          end 
+      end
 
       response = {}
       response["number_of_participants"] = attempts.size
