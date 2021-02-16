@@ -4,14 +4,11 @@
    <td width="20%">&nbsp;</td>
    <td width="60%" style="text-align: center;">
 <%
-  puts "------ Index JSP ------------"
-
   if not @message.nil?
 %>
     <span style="color: #2874a6"><%= @message %></span><br/><br/>
 <%
   end
-  puts "The phase is #{@attempt.phase}"
   if @attempt.phase == "begin"
     @attempt.current_question_number == 9
 %>
@@ -28,12 +25,10 @@
     </td>
 <%
   else
-    puts "The current question is #{@attempt.current_question_number}"
     current_question = @questions[@attempt.current_question_number - 1]
 
     # Determine if that was the last question
     if @attempt.current_question_number > @questions.size
-        puts "No more questions! We are done."
         @attempt.phase = "quiz"
 %>
         <b>You have completed the quiz!</b><br/><br/>
@@ -90,4 +85,3 @@
  </tbody>
 </table>
 <br/><br/>
-<% puts "End of quiz JSP" %>

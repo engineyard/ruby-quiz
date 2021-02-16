@@ -61,8 +61,9 @@ Rails.application.configure do
 
   config.require_master_key = true
 
-  config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
-  config.log_tags = [:request_id]
+  # Using Semantic Logger for now
+  #config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
+  #config.log_tags = [:request_id]
 
-  config.web_console.whitelisted_ips = '10.101.0.0/32'
+  config.web_console.whitelisted_ips = '10.101.63.36'
 end
