@@ -61,6 +61,17 @@ Rails.application.configure do
 
   config.require_master_key = true
   
-  config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
-  config.log_tags = [:request_id]
+  #config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
+  #config.log_tags = [:request_id]
+
+  config.log_tags = {
+    request_id: :request_id
+  }
+  config.rails_semantic_logger.semantic   = true
+  config.rails_semantic_logger.started    = false
+  config.rails_semantic_logger.processing = false
+  config.rails_semantic_logger.rendered   = false
+  STDOUT.sync = true
+  config.rails_semantic_logger.add_file_appender = false
+  config.semantic_logger.add_appender(io: STDOUT, level: config.log_level, formatter: config.rails_semantic_logger.format)
 end

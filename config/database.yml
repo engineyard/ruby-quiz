@@ -6,13 +6,13 @@
 #
 default: &default
   adapter: sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 20 } %>
   timeout: 5000
 
 development:
   adapter: mysql2
   encoding: utf8
-  pool: <%= ENV.fetch("db_pool_size") { 5 } %>
+  pool: <%= ENV.fetch("db_pool_size") { 20 } %>
   username: <%= ENV.fetch("db_yml_username") %>
   password: <%= ENV.fetch("db_yml_password") %>
   host: <%= ENV.fetch("db_yml_host") %>
