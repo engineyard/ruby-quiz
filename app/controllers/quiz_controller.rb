@@ -9,17 +9,16 @@ class QuizController < ApplicationController
     @quiz = Quiz.find(1)
     @questions = Question.where(quiz_id: @quiz.id).to_a
     if params["attempt"]
-        puts "Attempt params"
-        puts params["attempt"]
+        logger.info "Attempt params are: #{params["attempt"]}"
         local_attempt = Attempt.new(attempt_params)
-        puts "Now getting from database"
+        logger.info "Now getting the attempt from the database"
         @attempt = Attempt.find_by(taker: local_attempt.taker)
         if @attempt
-            puts "The database version is this: #{@attempt}" 
+            logger.info "The database version is this: #{@attempt}" 
             @attempt.answer = local_attempt.answer
             @attempt.current_question_number = local_attempt.current_question_number
         else 
-            puts "Not in the database yet"
+            logger.info "Not in the database yet"
             @attempt = local_attempt
         end
     else
