@@ -13,7 +13,7 @@ ARG RAILS_ENV
 # Copy the Gemfile and Gemfile.lock and bundle
 COPY Gemfile ./
 COPY Gemfile.lock ./
-RUN bundle install --jobs 20 --retry 5
+RUN gem install bundler && bundle install --jobs 20 --retry 5
 
 # Copy the main application.
 COPY . ./
