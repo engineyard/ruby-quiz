@@ -1,0 +1,5 @@
+---
+:verbose: false
+:concurrency: '<%= ENV["sidekiq_verbose"] || 4 %>'
+:queues:
+- ["default", 1]
