@@ -2,7 +2,7 @@ FROM engineyard/kontainers:ruby-2.6-v1.0.0
 
 # This will be needed by spree
 #RUN apt-get install -y imagemagick
-RUN apt-get install -y sqlite3
+RUN apt-get update -qq && apt-get install -y sqlite3
 
 # Configure the main working directory. This is the base
 # directory used in any further RUN, COPY, and ENTRYPOINT
