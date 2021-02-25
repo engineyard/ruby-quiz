@@ -1,7 +1,7 @@
 FROM engineyard/kontainers:ruby-2.6-v1.0.0
 
 # This will be needed by spree
-RUN apt-get install -y imagemagick
+#RUN apt-get install -y imagemagick
 
 # Configure the main working directory. This is the base
 # directory used in any further RUN, COPY, and ENTRYPOINT
