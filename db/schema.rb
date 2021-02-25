@@ -12,14 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2020_10_28_195546) do
 
-  create_table "attempts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "attempts", force: :cascade do |t|
     t.string "quiz_id"
     t.string "taker"
     t.integer "number_correct"
     t.integer "number_incorrect"
   end
 
-  create_table "questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "questions", force: :cascade do |t|
     t.string "quiz_id"
     t.integer "order"
     t.string "question"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2020_10_28_195546) do
     t.string "correct_answer"
   end
 
-  create_table "quizzes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "quizzes", force: :cascade do |t|
     t.string "name"
   end
 
