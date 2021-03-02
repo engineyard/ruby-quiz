@@ -25,7 +25,7 @@ ARG db_yml_username
 ARG db_yml_password
 ARG db_yml_host
 RUN erb -T - ./.eyk/config/database.yml.erb > config/database.yml
-RUN erb -T - ./.eyk/config/sidekiq.yml.erb config/sidekiq.yml
+RUN erb -T - ./.eyk/config/sidekiq.yml.erb > config/sidekiq.yml
 
 # Make the migration script runable
 RUN chmod +x .eyk/migration/db-migrate.sh
