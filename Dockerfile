@@ -28,7 +28,7 @@ RUN erb -T - ./.eyk/config/database.yml.erb > config/database.yml
 RUN erb -T - ./.eyk/config/sidekiq.yml.erb > config/sidekiq.yml
 
 # Make the migration script runable
-RUN chmod +x ./.eyk/migration/db-migrate.sh
+RUN chmod +x ./.eyk/migrations/db-migrate.sh
 
 # Precompile Rails assets
 RUN bundle exec rake assets:precompile
