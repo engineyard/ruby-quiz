@@ -11,6 +11,8 @@ RUN mkdir -p /app
 WORKDIR /app
 
 ARG RAILS_ENV
+ARG RAILS_MASTER_KEY
+
 # Copy the Gemfile and Gemfile.lock and bundle
 COPY Gemfile ./
 COPY Gemfile.lock ./
@@ -31,7 +33,7 @@ RUN erb -T - ./.eyk/config/sidekiq.yml.erb > config/sidekiq.yml
 RUN chmod +x ./.eyk/migrations/db-migrate.sh
 
 # Precompile Rails assets
-RUN bundle exec rake assets:precompile
+RUN RAILS_MASTER_KEY=${RAILS_MASTER_KEY} bundle exec rake assets:precompile
 
 # Expose port 5000 to the Docker host, so we can access it
 # from the outside. This is the same as the one set with
