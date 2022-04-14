@@ -4,6 +4,7 @@ ports:
 tasks:
   - init: >
       bundle install &&
-      bundle exec rake db:migrate RAILS_ENV=development
+      bundle exec rake db:migrate RAILS_ENV=development &&
+      bundle exec rake db:seed
     command: >
       rails server
