@@ -16,7 +16,7 @@
     @attempt.current_question_number == 9
 %>
      <br/><br/>
-     Please enter your first name to start the quiz.<br/><br/>
+     Please enter your given name to start the quiz.<br/><br/>
      <%= form_for @attempt, url: '/quiz/start' do |f| %>
        <%= f.text_field :taker %>
        <%= f.hidden_field :quiz_id %>
